@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+<!-- configure transaction service class -->
+<jee:jndi-lookup id="txUser" jndi-name="javax/transaction/UserTransaction"/>
+<!-- configure transaction manager class -->
+<jee:jndi-lookup id="txMgmr" jndi-name="javax/transaction/TransactionManager"/>
+
+<!-- configure JTA transaction manager -->
+<bean id="dtxmgmr" class="org.springframework.transaction.jta.JtaTransactionManager">
+   <property name="userTransaction" ref="txUser"/>
+   <property name="transactionManager" ref="txMgmr"/>
+</bean>
+
+
+<tx:annotation-driven transaction-manager="dtxmgmr"/>
+</beans>

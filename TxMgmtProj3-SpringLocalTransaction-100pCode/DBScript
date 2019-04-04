@@ -1,0 +1,15 @@
+SQL> select * from bankaccount;
+
+     ACCNO NAME          BALANCE
+---------- ---------- ----------
+      1001 raja             3900
+      2001 ramesh           2000
+      3001 rani            12000
+      4001 rajesh          10000
+
+SQL> desc bankaccount;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ACCNO                                     NOT NULL NUMBER(10)
+ NAME                                               VARCHAR2(10)
+ BALANCE                                            NUMBER(10,2)

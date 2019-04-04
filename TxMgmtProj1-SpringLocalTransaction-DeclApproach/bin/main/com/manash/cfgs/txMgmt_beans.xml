@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+<!-- cfg transaction manager -->
+<bean id="txmgmt" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+  <property name="dataSource" ref="ds"/>
+</bean>
+<bean id="nmtas" class="org.springframework.transaction.interceptor.NameMatchTransactionAttributeSource">
+  <property name="properties">
+    <props>
+    <prop key="transferAmount">PROPAGATION_REQUIRED</prop>
+    <prop key="transferAmount">-java.lang.IllegalAccessException</prop>
+    <prop key="transferAmount">timeout_10</prop>
+    </props>
+  </property>
+</bean>
+<bean id="tpfb" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+  <property name="transactionManager" ref="txmgmt"/>
+  <property name="target" ref="bankService"/>
+  <property name="transactionAttributeSource" ref="nmtas"/>
+</bean>
+</beans>
